@@ -200,9 +200,12 @@ public class EolinkerClient extends AbstractClient {
     @Override
     public void doFreshAuth() {
         LoginRequest2 user = new LoginRequest2();
+        user.setAppType(0);
         user.setClient(0);
         user.setPassword(this.password);
         user.setUsername(this.account);
+        user.setType(1);
+
         // user.setLoginCall(this.account);
         // user.setLoginPassword(InternalUtils.md5(this.password));
         String verifyCode = DateFormatUtils.format(new Date(), "EEE, dd MMM yyyy HH:mm:ss 'GMT'", Locale.ENGLISH);

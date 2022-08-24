@@ -6,11 +6,15 @@ package io.yapix.base.sdk.eolinker.request;
  */
 public class LoginRequest2 {
 
+    private Integer appType;
+
     private Integer client;
 
     private String password;
 
     private String username;
+
+    private Integer type;
 
     private String verifyCode;
 
@@ -44,5 +48,21 @@ public class LoginRequest2 {
 
     public void setVerifyCode(String verifyCode) {
         this.verifyCode = verifyCode;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
+    public void setAppType(Integer appType) {
+        this.appType = appType;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public Integer getAppType() {
+        return appType;
     }
 }
