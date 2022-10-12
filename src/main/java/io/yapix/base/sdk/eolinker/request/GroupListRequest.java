@@ -9,7 +9,7 @@ public class GroupListRequest {
     private String spaceKey;
 
     /** 模块 */
-    private Long module = 2L;
+    // private Long module = 2L;
 
     public String getProjectHashKey() {
         return projectHashKey;
@@ -27,11 +27,11 @@ public class GroupListRequest {
         this.spaceKey = spaceKey;
     }
 
-    public Long getModule() {
-        return module;
-    }
-
-    public void setModule(Long module) {
-        this.module = module;
-    }
+    // public Long getModule() {
+    //     return module;
+    // }
+    //
+    // public void setModule(Long module) {
+    //     this.module = module;
+    // }
 }

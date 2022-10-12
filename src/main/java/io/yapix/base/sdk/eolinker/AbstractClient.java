@@ -2,9 +2,8 @@ package io.yapix.base.sdk.eolinker;
 
 import com.google.common.collect.Lists;
 import com.google.gson.Gson;
-import io.netty.handler.codec.http.cookie.ClientCookieDecoder;
-import io.netty.handler.codec.http.cookie.Cookie;
 import io.yapix.base.sdk.eolinker.request.LoginResponse;
+import io.yapix.base.sdk.eolinker.request.LoginResponse.Data;
 import java.io.Closeable;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -13,9 +12,7 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Objects;
-import java.util.concurrent.TimeUnit;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -114,9 +111,8 @@ public abstract class AbstractClient implements Closeable {
         try (CloseableHttpResponse response = httpClient.execute(request)) {
             String data = doHandleResponse(request, response);
             if (isStoreAuth) {
-                this.authSession = getSession(response);
                 LoginResponse loginResponse = (new Gson()).fromJson(data, LoginResponse.class);
-                this.authSession.spaceKey = loginResponse.getSpaceKey();
+                this.authSession = getSession(loginResponse);
             }
             return data;
         } catch (IOException e) {
@@ -147,16 +143,15 @@ public abstract class AbstractClient implements Closeable {
         }
     }
 
-    protected HttpSession getSession(CloseableHttpResponse httpResponse) {
+    protected HttpSession getSession(LoginResponse httpResponse) {
         StringBuilder sb = new StringBuilder();
         Long ttl = null;
-        Header[] headers = httpResponse.getHeaders("set-cookie");
-        for (int i = 0; i < headers.length; i++) {
-            Cookie cookie = ClientCookieDecoder.STRICT.decode(headers[i].getValue());
-            sb.append(cookie.value().trim());
+        Data data = httpResponse.getData();
+        if (data == null) {
+            throw new RuntimeException("登录失败");
         }
         HttpSession session = new HttpSession();
-        session.setCookies(sb.toString());
+        session.setCookies(data.getJwt());
         return session;
     }
 

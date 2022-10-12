@@ -2,22 +2,65 @@ package io.yapix.base.sdk.eolinker.request;
 
 public class LoginResponse {
 
-    private Integer isFirstTimeLogin;
-    private String spaceKey;
+    private String success;
 
-    public Integer getIsFirstTimeLogin() {
-        return isFirstTimeLogin;
+    private String code;
+
+    private String requestId;
+
+    private Data data;
+
+    public static class Data {
+        String jwt;
+
+        String rjwt;
+
+        public String getJwt() {
+            return jwt;
+        }
+
+        public void setJwt(String jwt) {
+            this.jwt = jwt;
+        }
+
+        public String getRjwt() {
+            return rjwt;
+        }
+
+        public void setRjwt(String rjwt) {
+            this.rjwt = rjwt;
+        }
     }
 
-    public void setIsFirstTimeLogin(Integer isFirstTimeLogin) {
-        this.isFirstTimeLogin = isFirstTimeLogin;
+    public String getSuccess() {
+        return success;
     }
 
-    public String getSpaceKey() {
-        return spaceKey;
+    public void setSuccess(String success) {
+        this.success = success;
     }
 
-    public void setSpaceKey(String spaceKey) {
-        this.spaceKey = spaceKey;
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getRequestId() {
+        return requestId;
+    }
+
+    public void setRequestId(String requestId) {
+        this.requestId = requestId;
+    }
+
+    public Data getData() {
+        return data;
+    }
+
+    public void setData(Data data) {
+        this.data = data;
     }
 }
