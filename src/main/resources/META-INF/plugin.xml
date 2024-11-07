@@ -1,6 +1,6 @@
 <idea-plugin>
-    <id>yapix</id>
-    <name>Yapi X</name>
+    <id>agtdocumentplugin</id>
+    <name>agt-document-plugin</name>
     <vendor url="https://github.com/jetplugins">Jetplugins</vendor>
 
     <description><![CDATA[
